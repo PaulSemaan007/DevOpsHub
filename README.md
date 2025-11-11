@@ -6,7 +6,7 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/streamlit-1.31+-red.svg)](https://streamlit.io)
 
-> 🚀 **Live Demo:** [devopshub.streamlit.app](https://devopshub.streamlit.app) *(Deploy after testing)*
+> 🚀 **Live Demo:** [https://coredevops.streamlit.app](https://coredevops.streamlit.app)
 
 ---
 
