@@ -1,0 +1,70 @@
+Company: LBS Financial Credit Union
+Role: Programmer/Analyst II
+Source: Indeed.com
+Date Found: 2025-01-11
+Salary Range: $29.78 - $40.81/hour ($61,942 - $84,885/year)
+
+---
+
+Are you a solution-oriented programmer with excellent analytical skills and a proven ability to read and understand programs written by other programmers?
+
+We'd like to welcome a Programmer/Analyst II who is responsible for the development and maintenance of custom programs developed in-house using Intersystems Cache, Microsoft .Net, and scripting languages such as Python and PowerShell. Must have a working understanding of the Intersystems Cache programming language, or .Net programming and demonstrate the ability to read and understand programs written by other programmers. Will help maintain the custom program library on the Datasafe core system, and assist with the implementation of Datasafe Service Packs. Completes requests for custom programming, and requests for System Query Language (SQL) queries and reports. Works closely with the LBS Financial Management team and the SVP Information Systems on projects, as required.
+
+JOB REQUIREMENTS & RESPONSIBILITES
+
+Working under the direction of the SVP Information Systems, is responsible for the analysis, coding, testing, debugging, and deployment of in-house computer programs and scripts.
+Monitors Datasafe system errors and corrects them and/or reports them to Fiserv.
+Works with Credit Union staff in analysis and specification gathering for new programming projects.
+Participates as a team member on LBS Financial project teams, as needed.
+Ensures that in-house programs contain adequate comments.
+Helps maintain in-house programming documentation.
+Follows LBS Financial System Development Lifecycle requirements.
+Adheres to programming security best practices.
+Other duties as assigned
+
+EDUCATION & EXPERIENCE PREREQUISITES:
+
+Minimum four years programming experience, and/or minimum four (4) years' experience as a computer operator. College Degree preferred.
+Minimum two years programming experience on the Corelation Keystone core system.
+Must possess good mechanical and analytical ability.
+Excellent written and verbal communication skills required.
+At least two years' experience programming in Java or .Net, and MS SQL required. Experience with PowerShell, Python, HTML, and JavaScript a plus.
+Flexible hours and work schedule a must.
+
+BENEFITS & TOTAL REWARDS
+
+Medical, Dental, and Vision
+Paid Holidays, Sick Time, and PTO
+Defined Benefit Pension Plan
+Voluntary 401(k) and Roth(k)
+Insurance: Life, AD&D, LTD
+Travel Assist
+Rewards and Recognition Program
+Educational Reimbursement
+Paid Volunteer hours
+Loan discounts and free branch services
+Discount entertainment: movie tickets, travel, car rentals, and much more
+Plus, a variety of additional voluntary benefits
+
+PAY RANGE
+
+In accordance with California's Pay Transparency Act, the expected salary range for this position is between:
+
+$29.78 - $40.81
+
+Actual pay will be determined based on a candidate's specific qualifications, including their knowledge, skills, education and experience, internal equity consideration, as well as other job-related factors permitted by law.
+
+Note: As part of our screening process, LBS Financial conducts background investigations on candidates who are extended an offer and who agree and authorize us to do so. This investigation will include:
+
+Employment Verifications - Employment Dates & Job Titles
+Credit Report
+Criminal Records Search
+Social Security Search
+Governmental Registries Search
+
+Additionally, candidates must be eligible to be bonded through a fidelity bond to cover employee loss and risk.
+
+For additional information about our Credit Union and to apply for this opportunity, please visit our website at www.lbsfcu.org/careers. EOE
+
+Monday-Friday 8:30 am - 5:30 pm
+Full-Time 40 hours/Week

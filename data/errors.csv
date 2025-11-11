@@ -1,0 +1,21 @@
+ID,Error Code,System,Severity,Description,Status,Resolution Notes,Date Reported,Date Resolved,Reported to Fiserv,Fiserv Ticket
+ERR-001,ERR-BATCH-001,Datasafe,High,Nightly batch job failed - member dividend calculation,Fixed,Memory overflow in calculation loop. Added pagination to process members in chunks of 1000.,2025-09-27,2025-10-01,No,
+ERR-002,ERR-API-002,Datasafe,Critical,Core API timeout on loan origination,Reported to Fiserv,API response time exceeds 30s for complex loan products. Fiserv investigating server performance.,2025-10-14,2025-10-17,Yes,FSV-2024-1847
+ERR-003,ERR-SYNC-003,Keystone,Medium,Member photo sync failure from imaging system,Fixed,Incorrect file path in sync script. Updated to use UNC path instead of mapped drive.,2025-10-07,2025-10-12,No,
+ERR-004,ERR-RPT-004,Custom Integration,Low,Daily overdraft report email not sending,Fixed,SMTP authentication expired. Updated credentials in config file.,2025-10-10,2025-10-24,No,
+ERR-005,ERR-TRAN-005,Datasafe,High,ATM transaction posting delay,Investigating,Transactions from ATM ID 4521 posting 2+ hours late. Checking network connectivity and ISO8583 message queue.,2025-11-06,,No,
+ERR-006,ERR-WIRE-006,Datasafe,Critical,Wire transfer file generation corrupted,Reported to Fiserv,Output file contains invalid characters causing bank rejection. Fiserv patching file encoding logic.,2025-10-09,2025-10-23,Yes,FSV-2024-1923
+ERR-007,ERR-MOB-007,Custom Integration,Medium,Mobile banking login intermittent failures,Fixed,Session token expiration too aggressive. Extended from 15min to 30min.,2025-11-02,2025-11-04,No,
+ERR-008,ERR-LOG-008,Keystone,Low,Audit log entries missing timestamps,Fixed,Timezone configuration error. Corrected to Pacific Time in system settings.,2025-09-15,2025-09-24,No,
+ERR-009,ERR-ACH-009,Datasafe,High,ACH return file parsing error,Fixed,New return code R85 not recognized. Added to ACH return code lookup table.,2025-11-01,2025-11-03,No,
+ERR-010,ERR-BAL-010,Datasafe,Medium,Account balance mismatch on statements,Investigating,5 member accounts showing incorrect balances on monthly statements. Investigating GL posting sequence.,2025-11-07,,No,
+ERR-011,ERR-FRAUD-011,Custom Integration,Critical,Credit card fraud detection system offline,Fixed,Database connection pool exhausted. Increased max connections from 50 to 100.,2025-11-02,2025-11-05,No,
+ERR-012,ERR-SCH-012,Datasafe,Low,Certificate maturity reminder job skipped,Fixed,Cron job disabled during maintenance and not re-enabled. Reactivated and backfilled missed notices.,2025-10-06,2025-10-14,No,
+ERR-013,ERR-COLL-013,Keystone,High,Collateral valuation import failure,Reported to Fiserv,NADA vehicle value XML format changed. Fiserv updating parser for new schema.,2025-09-25,2025-10-02,Yes,FSV-2024-2001
+ERR-014,ERR-WEB-014,Custom Integration,Medium,Online banking dashboard charts not loading,Fixed,JavaScript library CDN outage. Switched to local hosting of Chart.js library.,2025-11-05,2025-11-08,No,
+ERR-015,ERR-PRNT-015,Datasafe,Low,Member statement printing alignment issue,Fixed,Printer driver update changed margin defaults. Adjusted print template margins by 0.25in.,2025-10-05,2025-10-12,No,
+ERR-016,ERR-CORE-016,Datasafe,Critical,Core system slow response during peak hours,Investigating,Query response times spike 10x between 9-11am. Running SQL profiler to identify bottlenecks.,2025-09-28,,No,
+ERR-017,ERR-EML-017,Custom Integration,Medium,Member email notifications delayed,Fixed,Email queue processing script hung. Added timeout and retry logic.,2025-10-29,2025-11-06,No,
+ERR-018,ERR-LOAN-018,Keystone,High,Loan payment allocation error,Reported to Fiserv,Extra payments incorrectly applying to future due dates instead of principal. Fiserv investigating payment allocation logic.,2025-09-29,2025-10-11,Yes,FSV-2024-2043
+ERR-019,ERR-RPT-019,Datasafe,Low,Board report footer missing page numbers,Fixed,Report template variable incorrectly named. Changed {PAGE_NUM} to {PAGE_NUMBER}.,2025-11-08,2025-11-21,No,
+ERR-020,ERR-INT-020,Custom Integration,Medium,Third-party credit bureau interface timeout,Investigating,Experian API calls timing out intermittently. Checking firewall rules and API rate limits.,2025-10-15,,No,
