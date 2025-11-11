@@ -75,18 +75,9 @@ def load_data():
 
 requests_df, errors_df, projects_df = load_data()
 
-# Sidebar navigation
+# Sidebar
 st.sidebar.markdown("# 🔧 DevOpsHub")
 st.sidebar.markdown("*Development Operations Dashboard*")
-st.sidebar.markdown("---")
-
-# Navigation
-page = st.sidebar.radio(
-    "Navigate to:",
-    ["📊 Dashboard", "📝 Requests", "⚠️ Errors", "📁 Projects"],
-    label_visibility="collapsed"
-)
-
 st.sidebar.markdown("---")
 st.sidebar.markdown("### About")
 st.sidebar.info(
@@ -112,181 +103,180 @@ st.sidebar.markdown("""
 if st.sidebar.button("🚀 Upgrade to Pro"):
     st.sidebar.success("Contact: paulsemaan007@gmail.com")
 
-# Main content
-if page == "📊 Dashboard":
-    st.markdown('<div class="main-header">📊 DevOpsHub Dashboard</div>', unsafe_allow_html=True)
-    st.markdown('<div class="sub-header">Real-time overview of development operations</div>', unsafe_allow_html=True)
+# Main content - Dashboard
+st.markdown('<div class="main-header">📊 DevOpsHub Dashboard</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-header">Real-time overview of development operations</div>', unsafe_allow_html=True)
 
-    # Key metrics row
-    col1, col2, col3, col4 = st.columns(4)
+# Key metrics row
+col1, col2, col3, col4 = st.columns(4)
 
-    with col1:
-        total_requests = len(requests_df)
-        open_requests = len(requests_df[requests_df["Status"] != "Completed"])
+with col1:
+    total_requests = len(requests_df)
+    open_requests = len(requests_df[requests_df["Status"] != "Completed"])
+    st.metric(
+        "Total Requests",
+        total_requests,
+        f"{open_requests} open",
+        delta_color="inverse"
+    )
+
+with col2:
+    total_errors = len(errors_df)
+    open_errors = len(errors_df[errors_df["Status"].isin(["New", "Investigating"])])
+    st.metric(
+        "System Errors",
+        total_errors,
+        f"{open_errors} open",
+        delta_color="inverse"
+    )
+
+with col3:
+    active_projects = len(projects_df[projects_df["Status"].isin(["Planning", "In Progress", "Testing"])])
+    total_projects = len(projects_df)
+    st.metric(
+        "Active Projects",
+        active_projects,
+        f"of {total_projects} total"
+    )
+
+with col4:
+    completed_requests = requests_df[requests_df["Status"] == "Completed"].copy()
+    if len(completed_requests) > 0:
+        completed_requests["Created Date"] = pd.to_datetime(completed_requests["Created Date"])
+        completed_requests["Completed Date"] = pd.to_datetime(completed_requests["Completed Date"])
+        completed_requests["Resolution Days"] = (completed_requests["Completed Date"] - completed_requests["Created Date"]).dt.days
+        avg_resolution = completed_requests["Resolution Days"].mean()
         st.metric(
-            "Total Requests",
-            total_requests,
-            f"{open_requests} open",
-            delta_color="inverse"
+            "Avg Resolution Time",
+            f"{avg_resolution:.1f} days",
+            "for completed requests"
         )
 
-    with col2:
-        total_errors = len(errors_df)
-        open_errors = len(errors_df[errors_df["Status"].isin(["New", "Investigating"])])
-        st.metric(
-            "System Errors",
-            total_errors,
-            f"{open_errors} open",
-            delta_color="inverse"
+st.markdown("---")
+
+# Charts row 1
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("📈 Requests by Status")
+    status_counts = requests_df["Status"].value_counts()
+    fig = px.pie(
+        values=status_counts.values,
+        names=status_counts.index,
+        color=status_counts.index,
+        color_discrete_map={
+            "Completed": "#28a745",
+            "In Progress": "#ffc107",
+            "Testing": "#6c757d",
+            "Submitted": "#17a2b8"
+        }
+    )
+    fig.update_traces(textposition='inside', textinfo='percent+label')
+    fig.update_layout(showlegend=False, height=300)
+    st.plotly_chart(fig, width='stretch')
+
+with col2:
+    st.subheader("📊 Requests by Type")
+    type_counts = requests_df["Type"].value_counts()
+    fig = px.bar(
+        x=type_counts.index,
+        y=type_counts.values,
+        labels={"x": "Request Type", "y": "Count"},
+        color=type_counts.values,
+        color_continuous_scale="Blues"
+    )
+    fig.update_layout(showlegend=False, height=300)
+    st.plotly_chart(fig, width='stretch')
+
+# Charts row 2
+col1, col2 = st.columns(2)
+
+with col1:
+    st.subheader("⚠️ Errors by Severity")
+    severity_counts = errors_df["Severity"].value_counts()
+    severity_order = ["Low", "Medium", "High", "Critical"]
+    severity_counts = severity_counts.reindex(severity_order, fill_value=0)
+
+    fig = px.bar(
+        x=severity_counts.index,
+        y=severity_counts.values,
+        labels={"x": "Severity", "y": "Count"},
+        color=severity_counts.index,
+        color_discrete_map={
+            "Low": "#28a745",
+            "Medium": "#ffc107",
+            "High": "#fd7e14",
+            "Critical": "#dc3545"
+        }
+    )
+    fig.update_layout(showlegend=False, height=300)
+    st.plotly_chart(fig, width='stretch')
+
+with col2:
+    st.subheader("📁 Projects by Status")
+    project_status_counts = projects_df["Status"].value_counts()
+    fig = px.bar(
+        x=project_status_counts.index,
+        y=project_status_counts.values,
+        labels={"x": "Project Status", "y": "Count"},
+        color=project_status_counts.values,
+        color_continuous_scale="Viridis"
+    )
+    fig.update_layout(showlegend=False, height=300)
+    st.plotly_chart(fig, width='stretch')
+
+st.markdown("---")
+
+# Recent activity
+st.subheader("🕐 Recent Activity")
+
+# Get recent requests (last 7 days)
+requests_df["Created Date"] = pd.to_datetime(requests_df["Created Date"])
+recent_date = datetime.now() - timedelta(days=7)
+recent_requests = requests_df[requests_df["Created Date"] >= recent_date].sort_values("Created Date", ascending=False)
+
+if len(recent_requests) > 0:
+    st.markdown("**Recent Requests (Last 7 Days)**")
+    for _, req in recent_requests.head(5).iterrows():
+        status_class = req["Status"].lower().replace(" ", "")
+        st.markdown(
+            f'<div style="padding: 0.5rem; margin: 0.5rem 0; background-color: #f8f9fa; border-radius: 0.25rem;">'
+            f'<strong>{req["ID"]}</strong> - {req["Title"]}<br>'
+            f'<span class="status-badge status-{status_class}">{req["Status"]}</span> '
+            f'<span style="color: #666;">| {req["Type"]} | Priority: {req["Priority"]}</span>'
+            f'</div>',
+            unsafe_allow_html=True
         )
+else:
+    st.info("No recent requests in the last 7 days.")
 
-    with col3:
-        active_projects = len(projects_df[projects_df["Status"].isin(["Planning", "In Progress", "Testing"])])
-        total_projects = len(projects_df)
-        st.metric(
-            "Active Projects",
-            active_projects,
-            f"of {total_projects} total"
-        )
+# Team workload
+st.markdown("---")
+st.subheader("👥 Team Workload")
 
-    with col4:
-        completed_requests = requests_df[requests_df["Status"] == "Completed"].copy()
-        if len(completed_requests) > 0:
-            completed_requests["Created Date"] = pd.to_datetime(completed_requests["Created Date"])
-            completed_requests["Completed Date"] = pd.to_datetime(completed_requests["Completed Date"])
-            completed_requests["Resolution Days"] = (completed_requests["Completed Date"] - completed_requests["Created Date"]).dt.days
-            avg_resolution = completed_requests["Resolution Days"].mean()
-            st.metric(
-                "Avg Resolution Time",
-                f"{avg_resolution:.1f} days",
-                "for completed requests"
-            )
+col1, col2 = st.columns(2)
 
-    st.markdown("---")
+with col1:
+    st.markdown("**Requests by Assignee**")
+    active_requests = requests_df[requests_df["Status"] != "Completed"]
+    assignee_counts = active_requests["Assigned To"].value_counts()
 
-    # Charts row 1
-    col1, col2 = st.columns(2)
+    for assignee, count in assignee_counts.items():
+        if assignee != "Unassigned":
+            st.markdown(f"**{assignee}**: {count} active requests")
 
-    with col1:
-        st.subheader("📈 Requests by Status")
-        status_counts = requests_df["Status"].value_counts()
-        fig = px.pie(
-            values=status_counts.values,
-            names=status_counts.index,
-            color=status_counts.index,
-            color_discrete_map={
-                "Completed": "#28a745",
-                "In Progress": "#ffc107",
-                "Testing": "#6c757d",
-                "Submitted": "#17a2b8"
-            }
-        )
-        fig.update_traces(textposition='inside', textinfo='percent+label')
-        fig.update_layout(showlegend=False, height=300)
-        st.plotly_chart(fig, width='stretch')
+with col2:
+    st.markdown("**Projects by Team Member**")
+    # Parse team members from projects
+    team_workload = {}
+    for _, proj in projects_df[projects_df["Status"].isin(["In Progress", "Testing"])].iterrows():
+        members = proj["Team Members"].split(", ")
+        for member in members:
+            if member != "Unassigned":
+                team_workload[member] = team_workload.get(member, 0) + 1
 
-    with col2:
-        st.subheader("📊 Requests by Type")
-        type_counts = requests_df["Type"].value_counts()
-        fig = px.bar(
-            x=type_counts.index,
-            y=type_counts.values,
-            labels={"x": "Request Type", "y": "Count"},
-            color=type_counts.values,
-            color_continuous_scale="Blues"
-        )
-        fig.update_layout(showlegend=False, height=300)
-        st.plotly_chart(fig, width='stretch')
-
-    # Charts row 2
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.subheader("⚠️ Errors by Severity")
-        severity_counts = errors_df["Severity"].value_counts()
-        severity_order = ["Low", "Medium", "High", "Critical"]
-        severity_counts = severity_counts.reindex(severity_order, fill_value=0)
-
-        fig = px.bar(
-            x=severity_counts.index,
-            y=severity_counts.values,
-            labels={"x": "Severity", "y": "Count"},
-            color=severity_counts.index,
-            color_discrete_map={
-                "Low": "#28a745",
-                "Medium": "#ffc107",
-                "High": "#fd7e14",
-                "Critical": "#dc3545"
-            }
-        )
-        fig.update_layout(showlegend=False, height=300)
-        st.plotly_chart(fig, width='stretch')
-
-    with col2:
-        st.subheader("📁 Projects by Status")
-        project_status_counts = projects_df["Status"].value_counts()
-        fig = px.bar(
-            x=project_status_counts.index,
-            y=project_status_counts.values,
-            labels={"x": "Project Status", "y": "Count"},
-            color=project_status_counts.values,
-            color_continuous_scale="Viridis"
-        )
-        fig.update_layout(showlegend=False, height=300)
-        st.plotly_chart(fig, width='stretch')
-
-    st.markdown("---")
-
-    # Recent activity
-    st.subheader("🕐 Recent Activity")
-
-    # Get recent requests (last 7 days)
-    requests_df["Created Date"] = pd.to_datetime(requests_df["Created Date"])
-    recent_date = datetime.now() - timedelta(days=7)
-    recent_requests = requests_df[requests_df["Created Date"] >= recent_date].sort_values("Created Date", ascending=False)
-
-    if len(recent_requests) > 0:
-        st.markdown("**Recent Requests (Last 7 Days)**")
-        for _, req in recent_requests.head(5).iterrows():
-            status_class = req["Status"].lower().replace(" ", "")
-            st.markdown(
-                f'<div style="padding: 0.5rem; margin: 0.5rem 0; background-color: #f8f9fa; border-radius: 0.25rem;">'
-                f'<strong>{req["ID"]}</strong> - {req["Title"]}<br>'
-                f'<span class="status-badge status-{status_class}">{req["Status"]}</span> '
-                f'<span style="color: #666;">| {req["Type"]} | Priority: {req["Priority"]}</span>'
-                f'</div>',
-                unsafe_allow_html=True
-            )
-    else:
-        st.info("No recent requests in the last 7 days.")
-
-    # Team workload
-    st.markdown("---")
-    st.subheader("👥 Team Workload")
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.markdown("**Requests by Assignee**")
-        active_requests = requests_df[requests_df["Status"] != "Completed"]
-        assignee_counts = active_requests["Assigned To"].value_counts()
-
-        for assignee, count in assignee_counts.items():
-            if assignee != "Unassigned":
-                st.markdown(f"**{assignee}**: {count} active requests")
-
-    with col2:
-        st.markdown("**Projects by Team Member**")
-        # Parse team members from projects
-        team_workload = {}
-        for _, proj in projects_df[projects_df["Status"].isin(["In Progress", "Testing"])].iterrows():
-            members = proj["Team Members"].split(", ")
-            for member in members:
-                if member != "Unassigned":
-                    team_workload[member] = team_workload.get(member, 0) + 1
-
-        for member, count in sorted(team_workload.items(), key=lambda x: x[1], reverse=True):
-            st.markdown(f"**{member}**: {count} active projects")
+    for member, count in sorted(team_workload.items(), key=lambda x: x[1], reverse=True):
+        st.markdown(f"**{member}**: {count} active projects")
 
 # Footer
 st.markdown("---")
