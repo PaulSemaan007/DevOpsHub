@@ -16,46 +16,62 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS
+# Custom CSS - DevOps Tech Theme
 st.markdown("""
 <style>
+    /* DevOps Tech Theme - Dark Blues & Grays */
     .main-header {
         font-size: 2.5rem;
         font-weight: bold;
-        color: #1f77b4;
+        color: #2c3e50;
         margin-bottom: 0.5rem;
+        border-left: 5px solid #3498db;
+        padding-left: 1rem;
     }
     .sub-header {
         font-size: 1.2rem;
-        color: #666;
+        color: #7f8c8d;
         margin-bottom: 2rem;
+        padding-left: 1.5rem;
     }
     .metric-card {
-        background-color: #f0f2f6;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         padding: 1.5rem;
         border-radius: 0.5rem;
-        border-left: 4px solid #1f77b4;
+        color: white;
     }
     .status-badge {
-        padding: 0.25rem 0.75rem;
-        border-radius: 0.25rem;
-        font-weight: bold;
+        padding: 0.3rem 0.8rem;
+        border-radius: 0.3rem;
+        font-weight: 600;
         font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
-    .status-completed { background-color: #d4edda; color: #155724; }
-    .status-inprogress { background-color: #fff3cd; color: #856404; }
-    .status-submitted { background-color: #d1ecf1; color: #0c5460; }
-    .status-testing { background-color: #e2e3e5; color: #383d41; }
-    .status-critical { background-color: #f8d7da; color: #721c24; }
-    .status-high { background-color: #fff3cd; color: #856404; }
-    .status-medium { background-color: #d1ecf1; color: #0c5460; }
-    .status-low { background-color: #d4edda; color: #155724; }
+    .status-completed { background-color: #27ae60; color: white; }
+    .status-inprogress { background-color: #f39c12; color: white; }
+    .status-submitted { background-color: #3498db; color: white; }
+    .status-testing { background-color: #95a5a6; color: white; }
+    .status-critical { background-color: #e74c3c; color: white; }
+    .status-high { background-color: #e67e22; color: white; }
+    .status-medium { background-color: #3498db; color: white; }
+    .status-low { background-color: #1abc9c; color: white; }
     .footer {
         margin-top: 3rem;
         padding-top: 1rem;
-        border-top: 1px solid #ddd;
+        border-top: 2px solid #34495e;
         text-align: center;
-        color: #666;
+        color: #7f8c8d;
+        background-color: #ecf0f1;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+    }
+    /* Sidebar customization */
+    [data-testid="stSidebar"] {
+        background-color: #2c3e50;
+    }
+    [data-testid="stSidebar"] * {
+        color: #ecf0f1 !important;
     }
 </style>
 """, unsafe_allow_html=True)
