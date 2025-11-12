@@ -1,12 +1,17 @@
 # DevOpsHub - Development Operations Dashboard for Core Banking IT Teams
 
+**⚠️ PROJECT STATUS: ARCHIVED (On Hold)**
+
+This project is currently on hold while we focus on [OpenSAM](https://github.com/paulsemaan007/OpenSAM). The concept and code remain available for reference, but active development has been paused.
+
 **Built from real job requirements at LBS Financial Credit Union**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Streamlit](https://img.shields.io/badge/streamlit-1.31+-red.svg)](https://streamlit.io)
+[![Status: Archived](https://img.shields.io/badge/status-archived-yellow.svg)](https://github.com/paulsemaan007/DevOpsHub)
 
-> 🚀 **Live Demo:** [https://coredevops.streamlit.app](https://coredevops.streamlit.app)
+> 🚀 **Live Demo:** [https://coredevops.streamlit.app](https://coredevops.streamlit.app) *(May be taken offline)*
 
 ---
 
