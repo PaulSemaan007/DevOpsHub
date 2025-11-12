@@ -16,6 +16,9 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Override default page name in sidebar
+st.sidebar.page_link("app.py", label="🏠 Home", icon="🏠")
+
 # Custom CSS - DevOps Tech Theme
 st.markdown("""
 <style>
