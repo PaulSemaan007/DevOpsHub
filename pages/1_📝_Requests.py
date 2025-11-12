@@ -7,24 +7,38 @@ from datetime import datetime, timedelta
 
 st.set_page_config(page_title="Requests - DevOpsHub", page_icon="📝", layout="wide")
 
-# Custom CSS
+# Custom CSS - DevOps Tech Theme
 st.markdown("""
 <style>
+    /* DevOps Tech Theme - Consistent with main app */
     .status-badge {
-        padding: 0.25rem 0.75rem;
-        border-radius: 0.25rem;
-        font-weight: bold;
+        padding: 0.3rem 0.8rem;
+        border-radius: 0.3rem;
+        font-weight: 600;
         font-size: 0.85rem;
         display: inline-block;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
-    .status-completed { background-color: #d4edda; color: #155724; }
-    .status-inprogress { background-color: #fff3cd; color: #856404; }
-    .status-submitted { background-color: #d1ecf1; color: #0c5460; }
-    .status-testing { background-color: #e2e3e5; color: #383d41; }
-    .priority-critical { background-color: #f8d7da; color: #721c24; }
-    .priority-high { background-color: #fff3cd; color: #856404; }
-    .priority-medium { background-color: #d1ecf1; color: #0c5460; }
-    .priority-low { background-color: #d4edda; color: #155724; }
+    .status-completed { background-color: #27ae60; color: white; }
+    .status-inprogress { background-color: #f39c12; color: white; }
+    .status-submitted { background-color: #3498db; color: white; }
+    .status-testing { background-color: #95a5a6; color: white; }
+    .priority-critical { background-color: #e74c3c; color: white; }
+    .priority-high { background-color: #e67e22; color: white; }
+    .priority-medium { background-color: #3498db; color: white; }
+    .priority-low { background-color: #1abc9c; color: white; }
+    /* Sidebar */
+    [data-testid="stSidebar"] {
+        background-color: #2c3e50;
+    }
+    [data-testid="stSidebar"] * {
+        color: #ecf0f1 !important;
+    }
+    /* Headers */
+    h1, h2, h3 {
+        color: #2c3e50;
+    }
 </style>
 """, unsafe_allow_html=True)
 

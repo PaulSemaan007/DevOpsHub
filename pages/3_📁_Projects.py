@@ -7,34 +7,48 @@ from datetime import datetime, timedelta
 
 st.set_page_config(page_title="Projects - DevOpsHub", page_icon="📁", layout="wide")
 
-# Custom CSS
+# Custom CSS - DevOps Tech Theme
 st.markdown("""
 <style>
+    /* DevOps Tech Theme - Consistent with main app */
     .status-badge {
-        padding: 0.25rem 0.75rem;
-        border-radius: 0.25rem;
-        font-weight: bold;
+        padding: 0.3rem 0.8rem;
+        border-radius: 0.3rem;
+        font-weight: 600;
         font-size: 0.85rem;
         display: inline-block;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
-    .status-planning { background-color: #d1ecf1; color: #0c5460; }
-    .status-inprogress { background-color: #fff3cd; color: #856404; }
-    .status-testing { background-color: #e2e3e5; color: #383d41; }
-    .status-deployed { background-color: #d4edda; color: #155724; }
-    .status-onhold { background-color: #f8d7da; color: #721c24; }
+    .status-planning { background-color: #3498db; color: white; }
+    .status-inprogress { background-color: #f39c12; color: white; }
+    .status-testing { background-color: #95a5a6; color: white; }
+    .status-deployed { background-color: #27ae60; color: white; }
+    .status-onhold { background-color: #e74c3c; color: white; }
     .sdlc-phase {
         padding: 0.5rem;
         margin: 0.25rem 0;
         border-radius: 0.25rem;
-        background-color: #f8f9fa;
+        background-color: #ecf0f1;
     }
     .sdlc-complete {
-        background-color: #d4edda;
-        border-left: 4px solid #28a745;
+        background-color: #d5f4e6;
+        border-left: 4px solid #27ae60;
     }
     .sdlc-pending {
-        background-color: #e2e3e5;
-        border-left: 4px solid #6c757d;
+        background-color: #e8eaed;
+        border-left: 4px solid #95a5a6;
+    }
+    /* Sidebar */
+    [data-testid="stSidebar"] {
+        background-color: #2c3e50;
+    }
+    [data-testid="stSidebar"] * {
+        color: #ecf0f1 !important;
+    }
+    /* Headers */
+    h1, h2, h3 {
+        color: #2c3e50;
     }
 </style>
 """, unsafe_allow_html=True)

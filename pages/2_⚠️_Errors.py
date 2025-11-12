@@ -7,31 +7,47 @@ from datetime import datetime
 
 st.set_page_config(page_title="Errors - DevOpsHub", page_icon="⚠️", layout="wide")
 
-# Custom CSS
+# Custom CSS - DevOps Tech Theme
 st.markdown("""
 <style>
+    /* DevOps Tech Theme - Consistent with main app */
     .severity-badge {
-        padding: 0.25rem 0.75rem;
-        border-radius: 0.25rem;
-        font-weight: bold;
+        padding: 0.3rem 0.8rem;
+        border-radius: 0.3rem;
+        font-weight: 600;
         font-size: 0.85rem;
         display: inline-block;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
-    .severity-low { background-color: #d4edda; color: #155724; }
-    .severity-medium { background-color: #fff3cd; color: #856404; }
-    .severity-high { background-color: #fff3cd; color: #fd7e14; }
-    .severity-critical { background-color: #f8d7da; color: #721c24; }
+    .severity-low { background-color: #1abc9c; color: white; }
+    .severity-medium { background-color: #3498db; color: white; }
+    .severity-high { background-color: #e67e22; color: white; }
+    .severity-critical { background-color: #e74c3c; color: white; }
     .status-badge {
-        padding: 0.25rem 0.75rem;
-        border-radius: 0.25rem;
-        font-weight: bold;
+        padding: 0.3rem 0.8rem;
+        border-radius: 0.3rem;
+        font-weight: 600;
         font-size: 0.85rem;
         display: inline-block;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
-    .status-new { background-color: #d1ecf1; color: #0c5460; }
-    .status-investigating { background-color: #fff3cd; color: #856404; }
-    .status-fixed { background-color: #d4edda; color: #155724; }
-    .status-reportedtofiserv { background-color: #e2e3e5; color: #383d41; }
+    .status-new { background-color: #3498db; color: white; }
+    .status-investigating { background-color: #f39c12; color: white; }
+    .status-fixed { background-color: #27ae60; color: white; }
+    .status-reportedtofiserv { background-color: #95a5a6; color: white; }
+    /* Sidebar */
+    [data-testid="stSidebar"] {
+        background-color: #2c3e50;
+    }
+    [data-testid="stSidebar"] * {
+        color: #ecf0f1 !important;
+    }
+    /* Headers */
+    h1, h2, h3 {
+        color: #2c3e50;
+    }
 </style>
 """, unsafe_allow_html=True)
 
